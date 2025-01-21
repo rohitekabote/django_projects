@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('clac.urls')),
+    # path('', include('clac.urls')),
+    path('', include('travello.urls')),
     path('admin/', admin.site.urls),
 ]
