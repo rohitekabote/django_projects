@@ -69,34 +69,23 @@ a {
 </head>
 <body>
 
-<form action="register" method='post'>
+<form action="login" method='post'>
     {% csrf_token %}
   <div class="container">
-    <h1>Register</h1>
-    <p>Please fill in this form to create an account.</p>
+    <h1>Login</h1>
+    <p>Please fill in this for login</p>
     <hr>
-
-    <label for="firstname "><b>firstname </b></label>
-    <input type="text" placeholder="Enter first anme" name="firstname" id="email" required>
-
-    <label for="lastname"><b>lastname</b></label>
-    <input type="text" placeholder="Enter last name" name="lastname" id="email" required>
 
     <label for="user name"><b>username</b></label>
     <input type="text" placeholder="Enter user name" name="username" id="email" required>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
-
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" id="psw" required>
 
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
-    <hr>
-    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
-    <button type="submit" class="registerbtn">Register</button>
+    <hr>
+
+
+    <button type="login" class="registerbtn">Login</button>
   </div>
   
   <div class="container signin">
@@ -105,7 +94,7 @@ a {
 </form>
 
 <div>
-  {% for message in messages%}
+  {% for message in messages %}
   <h3> {{message}} </h3>
   {% endfor %}
 </div>
