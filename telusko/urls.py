@@ -20,10 +20,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    
     # path('', include('clac.urls')),
     path('', include('travello.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
+    # Other URL patterns
+    path('ckeditor/', include('ckeditor_uploader.urls')),  # Add this line
 ]
 
-urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -265,8 +265,18 @@
 								{% endif%}
 							</div>
 							<div class="destination_content">
-								<div class="destination_title"><a href="destinations.html">{{dect.name}}</a></div>
-								<div class="destination_subtitle"><p>{{dect.des}}</p></div>
+
+								<div class="destination_title"><a href="">{{dect.name}}</a></div>
+							
+								
+								<div class="destination_subtitle"><p>{{dect.des|striptags|slice:":200"|safe}} </p></div>
+								{% if forloop.counter <= 2 or user.is_authenticated %}
+								<a href="{% url 'description' dect.id %}">read more </a>
+								{% comment %} <div class="destination_title"><a href="{% url 'description' dect.id %}">{{dect.name}}</a></div> {% endcomment %}
+        						{% else %}
+            						<p><a href="{% url 'login' %}">rea_more</a></p>
+        						{% endif %}
+
 								<div class="destination_price">From ${{dect.price}}</div>
 							</div>
 						</div>

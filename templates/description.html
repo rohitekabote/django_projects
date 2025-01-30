@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            welcome
+        </title>
+    </head>
+
+<body>
+    
+<div class="destination item">
+	<div class="destination_image">
+		<img src="{{dect.img.url}}" alt="">
+			{% if dect.offer %}
+				<div class="spec_offer text-center">Special Offer</div>
+			{% endif%}
+			</div>
+			    <div class="destination_content">
+				<div class="destination_title">{{dect.name}}</div>
+				<div class="destination_subtitle"><p>{{dect.des|safe}}</p></div>
+				<div class="destination_price">From ${{dect.price}}</div>
+			</div>
+</div>
+<hr>
+<h3> comments </h3>
+<div> 
+    <h2>Comments {{total_comments}}</h2>
+{% for comment in comments %}
+    <div style="border: 1px solid #ddd; padding: 10px; margin: 10px;">
+        <strong>{{ comment.user.username }}</strong>: {{ comment.comment }}
+        <br><small>{{ comment.created_at }}</small>
+
+
+        <!-- Like Form -->
+        <form action="{% url 'like_dislike_comment' comment.id 'like' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">👍 Like ({{ comment.total_likes }})</button>
+        </form>
+        <form action="{% url 'like_dislike_comment' comment.id 'dislike' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">👎 Dislike ({{ comment.total_dislikes }})</button>
+        </form>
+
+        <!-- Reply Form -->
+        <form action="" method="post" style="margin-top: 10px;">
+            {% csrf_token %}
+            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+            <textarea name="comment" placeholder="Reply to this comment" rows="2" cols="40"></textarea>
+            <button type="submit">Reply</button>
+        </form>
+
+        <!-- Like & Dislike Form for Comments -->
+        no of replys: {{comment.comments_set.count}}
+        {% for reply in comment.comments_set.all %}
+            <div style="margin-left: 40px; border-left: 2px solid #ccc; padding-left: 10px;">
+                <strong>{{ reply.user.username }}</strong>: {{ reply.comment }} 
+                <br><small>{{ reply.created_at }}</small>
+            </div>
+
+            <!-- Like & Dislike Form for Replies -->
+            <form action="{% url 'like_dislike_comment' reply.id 'like' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">👍 Like ({{ reply.total_likes }})</button>
+            </form>
+            <form action="{% url 'like_dislike_comment' reply.id 'dislike' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">👎 Dislike ({{ reply.total_dislikes }})</button>
+            </form>
+        {% endfor %}
+    </div>
+{% empty %}
+    <p>No comments yet. Be the first to comment!</p>
+{% endfor %}
+
+</div>
+<br>
+<form action="" method='post'>
+    {% csrf_token %}
+    <div>
+        
+        <hr>
+
+        <label for="comment"><b>comment</b></label><br>
+        <textarea placeholder="Enter comment" name="comment" id="" rows="10" cols='80' > </textarea>
+        
+
+        <button type="submit" class="commentbtn">comment</button>
+    </div>
+</form>
+
+
+</body>
+</html>
