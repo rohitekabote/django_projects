@@ -32,4 +32,12 @@ class Comments(models.Model):
     def __str__(self):
         return self.comment
     
+
+class VisitorTracking(models.Model):
+    ip_address = models.GenericIPAddressField()
+    visited_destinations = models.ManyToManyField(Destination, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.ip_address
    

@@ -242,7 +242,7 @@
 	</div>
 
 	<!-- Destinations -->
-
+	<h2>Visited Destinations: {{ visited_count }}/2</h2>
 	<div class="destinations" id="destinations">
 		<div class="container">
 			<div class="row">
@@ -254,33 +254,32 @@
 			<div class="row destinations_row">
 				<div class="col">
 					<div class="destinations_container item_grid">
+						
 
 						<!-- Destination -->
 						{% for dect in dects %}
-						<div class="destination item">
-							<div class="destination_image">
-								<img src="{{dect.img.url}}" alt="">
-								{% if dect.offer %}
-								<div class="spec_offer text-center"><a href="#">Special Offer</a></div>
-								{% endif%}
+							<div class="destination item">
+								<div class="destination_image">
+									<img src="{{ dect.img.url }}" alt="">
+									{% if dect.offer %}
+									<div class="spec_offer text-center"><a href="#">Special Offer</a></div>
+									{% endif %}
+								</div>
+								<div class="destination_content">
+									<div class="destination_title">
+										<a href="{% url 'description' dect.id %}">{{ dect.name }}</a>
+									</div>
+									<div class="destination_subtitle">
+										<p>
+											{{ dect.des|striptags|slice:":200"|safe }}  
+											<a href="{% url 'description' dect.id %}">read more</a>
+										</p>
+									</div>
+									<div class="destination_price">From ${{ dect.price }}</div>
+								</div>
 							</div>
-							<div class="destination_content">
-
-								<div class="destination_title"><a href="">{{dect.name}}</a></div>
-							
-								
-								<div class="destination_subtitle"><p>{{dect.des|striptags|slice:":200"|safe}} </p></div>
-								{% if forloop.counter <= 2 or user.is_authenticated %}
-								<a href="{% url 'description' dect.id %}">read more </a>
-								{% comment %} <div class="destination_title"><a href="{% url 'description' dect.id %}">{{dect.name}}</a></div> {% endcomment %}
-        						{% else %}
-            						<p><a href="{% url 'login' %}">rea_more</a></p>
-        						{% endif %}
-
-								<div class="destination_price">From ${{dect.price}}</div>
-							</div>
-						</div>
 						{% endfor %}
+
 
 						
 
